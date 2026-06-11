@@ -40,6 +40,22 @@
     .page-header {
       padding: 8rem 2.5rem 4rem;
       border-bottom: 1px solid #1a1a1a;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/tutorials-hero-bg.jpg');
+      background-size: cover;
+      background-position: center 40%;
+      background-repeat: no-repeat;
+      opacity: 0.3;
+      z-index: 0;
+    }
+    .page-header > *:not(.page-header-bg) {
+      position: relative;
+      z-index: 1;
     }
     .breadcrumb {
       font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
@@ -195,6 +211,65 @@
     .footer-socials { display: flex; gap: 1.2rem; }
     .footer-socials a { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey-400); text-decoration: none; transition: color 0.2s; }
     .footer-socials a:hover { color: var(--white); }
+    /* ── YOUTUBE EMBEDS ── */
+    .yt-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+      overflow: hidden;
+    }
+    .yt-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    /* featured thumb overrides */
+    .featured-thumb .yt-wrap {
+      height: 100%;
+      aspect-ratio: unset;
+    }
+
+    /* ── WHATSAPP FLOAT ── */
+    .wa-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+    .wa-float-label {
+      background: var(--white);
+      color: var(--black);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateX(8px);
+      transition: opacity 0.25s, transform 0.25s;
+      pointer-events: none;
+    }
+    .wa-float:hover .wa-float-label { opacity: 1; transform: translateX(0); }
+    .wa-float-btn {
+      width: 56px; height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+      transition: transform 0.2s, box-shadow 0.2s;
+      flex-shrink: 0;
+    }
+    .wa-float:hover .wa-float-btn { transform: scale(1.08); box-shadow: 0 6px 28px rgba(37,211,102,0.55); }
+    .wa-float-btn svg { width: 28px; height: 28px; fill: #fff; }
   </style>
 </head>
 <body>
@@ -224,6 +299,7 @@
 </div>
 
 <div class="page-header">
+  <div class="page-header-bg"></div>
   <div class="breadcrumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Tutorials</div>
   <h1 class="page-title">
     Learn
@@ -246,10 +322,11 @@
   <div class="tutorials-grid" id="grid">
 
     <!-- Featured -->
-    <a href="#" class="featured-card" data-tags="beginner classic">
+    <a href="https://www.youtube.com/watch?v=2v3nPGYPFEo" target="_blank" rel="noopener" class="featured-card" data-tags="beginner classic">
       <div class="featured-thumb">
-        <!-- Replace: <img src="images/tut-featured.jpg" alt="Featured tutorial" /> -->
-        <div class="thumb-placeholder"><div class="play-icon">▶</div></div>
+        <div class="yt-wrap">
+          <iframe src="https://www.youtube.com/embed/2v3nPGYPFEo?rel=0&modestbranding=1" allowfullscreen loading="lazy" title="How to Apply Classic Lash Extensions from Scratch"></iframe>
+        </div>
       </div>
       <div class="featured-body">
         <div class="featured-label">⭐ Featured · Beginner · Classic</div>
@@ -260,8 +337,12 @@
     </a>
 
     <!-- Cards -->
-    <a href="#" class="tutorial-card" data-tags="intermediate volume">
-      <div class="tutorial-thumb"><div class="thumb-placeholder"><div class="play-icon">▶</div></div></div>
+    <a href="https://www.youtube.com/watch?v=JQ6VBs_1bBE" target="_blank" rel="noopener" class="tutorial-card" data-tags="intermediate volume">
+      <div class="tutorial-thumb">
+        <div class="yt-wrap">
+          <iframe src="https://www.youtube.com/embed/JQ6VBs_1bBE?rel=0&modestbranding=1" allowfullscreen loading="lazy" title="Making Perfect Volume Fans"></iframe>
+        </div>
+      </div>
       <div class="tutorial-body">
         <div class="tutorial-meta">
           <span class="tutorial-tag">Intermediate · Volume</span>
@@ -272,8 +353,12 @@
       </div>
     </a>
 
-    <a href="#" class="tutorial-card" data-tags="advanced">
-      <div class="tutorial-thumb"><div class="thumb-placeholder"><div class="play-icon">▶</div></div></div>
+    <a href="https://www.youtube.com/watch?v=okTkX3bCHD8" target="_blank" rel="noopener" class="tutorial-card" data-tags="advanced">
+      <div class="tutorial-thumb">
+        <div class="yt-wrap">
+          <iframe src="https://www.youtube.com/embed/okTkX3bCHD8?rel=0&modestbranding=1" allowfullscreen loading="lazy" title="Lash Retention"></iframe>
+        </div>
+      </div>
       <div class="tutorial-body">
         <div class="tutorial-meta">
           <span class="tutorial-tag">Advanced · Retention</span>
@@ -284,8 +369,12 @@
       </div>
     </a>
 
-    <a href="#" class="tutorial-card" data-tags="beginner tools">
-      <div class="tutorial-thumb"><div class="thumb-placeholder"><div class="play-icon">▶</div></div></div>
+    <a href="https://www.youtube.com/watch?v=KqKOBpfMBhw" target="_blank" rel="noopener" class="tutorial-card" data-tags="beginner tools">
+      <div class="tutorial-thumb">
+        <div class="yt-wrap">
+          <iframe src="https://www.youtube.com/embed/KqKOBpfMBhw?rel=0&modestbranding=1" allowfullscreen loading="lazy" title="Essential Lash Tools"></iframe>
+        </div>
+      </div>
       <div class="tutorial-body">
         <div class="tutorial-meta">
           <span class="tutorial-tag">Beginner · Tools</span>
@@ -296,8 +385,12 @@
       </div>
     </a>
 
-    <a href="#" class="tutorial-card" data-tags="intermediate classic">
-      <div class="tutorial-thumb"><div class="thumb-placeholder"><div class="play-icon">▶</div></div></div>
+    <a href="https://www.youtube.com/watch?v=lFWFtPpMtKE" target="_blank" rel="noopener" class="tutorial-card" data-tags="intermediate classic">
+      <div class="tutorial-thumb">
+        <div class="yt-wrap">
+          <iframe src="https://www.youtube.com/embed/lFWFtPpMtKE?rel=0&modestbranding=1" allowfullscreen loading="lazy" title="Lash Mapping for Eye Shapes"></iframe>
+        </div>
+      </div>
       <div class="tutorial-body">
         <div class="tutorial-meta">
           <span class="tutorial-tag">Intermediate · Classic</span>
@@ -308,8 +401,12 @@
       </div>
     </a>
 
-    <a href="#" class="tutorial-card" data-tags="advanced volume">
-      <div class="tutorial-thumb"><div class="thumb-placeholder"><div class="play-icon">▶</div></div></div>
+    <a href="https://www.youtube.com/watch?v=Xb_8IKqGbX4" target="_blank" rel="noopener" class="tutorial-card" data-tags="advanced volume">
+      <div class="tutorial-thumb">
+        <div class="yt-wrap">
+          <iframe src="https://www.youtube.com/embed/Xb_8IKqGbX4?rel=0&modestbranding=1" allowfullscreen loading="lazy" title="Mega Volume Lashes"></iframe>
+        </div>
+      </div>
       <div class="tutorial-body">
         <div class="tutorial-meta">
           <span class="tutorial-tag">Advanced · Volume</span>
@@ -320,8 +417,12 @@
       </div>
     </a>
 
-    <a href="#" class="tutorial-card" data-tags="beginner tools">
-      <div class="tutorial-thumb"><div class="thumb-placeholder"><div class="play-icon">▶</div></div></div>
+    <a href="https://www.youtube.com/watch?v=0_LuDN_MCMY" target="_blank" rel="noopener" class="tutorial-card" data-tags="beginner tools">
+      <div class="tutorial-thumb">
+        <div class="yt-wrap">
+          <iframe src="https://www.youtube.com/embed/0_LuDN_MCMY?rel=0&modestbranding=1" allowfullscreen loading="lazy" title="Starting a Lash Business"></iframe>
+        </div>
+      </div>
       <div class="tutorial-body">
         <div class="tutorial-meta">
           <span class="tutorial-tag">Beginner · Business</span>
@@ -343,6 +444,16 @@
     <a href="https://georgelashes.com/#booking">Book</a>
   </div>
 </footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/254713635302?text=Hi%20George%2C%20I'd%20like%20to%20book%20an%20appointment" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <span class="wa-float-label">Chat on WhatsApp</span>
+  <div class="wa-float-btn">
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16.003 2.667C8.64 2.667 2.667 8.64 2.667 16c0 2.347.627 4.64 1.813 6.653L2.667 29.333l6.84-1.786A13.253 13.253 0 0016.003 29.333C23.36 29.333 29.333 23.36 29.333 16S23.36 2.667 16.003 2.667zm0 2.4c5.88 0 10.93 5.053 10.93 10.933 0 5.88-5.05 10.933-10.93 10.933a10.9 10.9 0 01-5.547-1.52l-.387-.227-4.053 1.053 1.08-3.947-.253-.4A10.893 10.893 0 015.07 16c0-5.88 5.053-10.933 10.933-10.933zm-3.12 5.28c-.24 0-.627.093-.947.44-.32.347-1.213 1.187-1.213 2.88 0 1.693 1.24 3.333 1.413 3.56.173.227 2.413 3.88 5.96 5.28 2.96 1.16 3.547.947 4.187.893.64-.053 2.067-.84 2.36-1.653.293-.813.293-1.507.2-1.653-.093-.147-.333-.24-.693-.427-.36-.187-2.067-1.013-2.387-1.133-.32-.12-.547-.187-.773.187-.227.373-.88 1.133-1.08 1.36-.2.227-.4.24-.747.08-.347-.16-1.467-.547-2.8-1.733-1.04-.933-1.733-2.08-1.933-2.427-.2-.347-.013-.533.16-.72.16-.16.36-.4.533-.613.173-.213.24-.36.36-.613.12-.253.053-.467-.027-.653-.08-.187-.747-1.893-1.04-2.587-.267-.667-.547-.573-.747-.587-.187-.013-.4-.013-.627-.013z"/>
+    </svg>
+  </div>
+</a>
 
 <script>
   function toggleMenu() {
