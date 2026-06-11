@@ -46,7 +46,7 @@
     .page-header-bg {
       position: absolute;
       inset: 0;
-      background-image: url('images/tutorials-hero-bg.jpg');
+      background-image: url('images/fan.jpeg');
       background-size: cover;
       background-position: center 40%;
       background-repeat: no-repeat;
@@ -211,25 +211,37 @@
     .footer-socials { display: flex; gap: 1.2rem; }
     .footer-socials a { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey-400); text-decoration: none; transition: color 0.2s; }
     .footer-socials a:hover { color: var(--white); }
-    /* ── YOUTUBE EMBEDS ── */
-    .yt-wrap {
+    /* ── PLAY OVERLAY ON THUMBNAILS ── */
+    .tutorial-thumb, .featured-thumb {
       position: relative;
-      width: 100%;
-      aspect-ratio: 16/9;
-      background: #000;
-      overflow: hidden;
     }
-    .yt-wrap iframe {
+    .thumb-play-overlay {
       position: absolute;
       inset: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0);
+      transition: background 0.25s;
     }
-    /* featured thumb overrides */
-    .featured-thumb .yt-wrap {
-      height: 100%;
-      aspect-ratio: unset;
+    .tutorial-card:hover .thumb-play-overlay,
+    .featured-card:hover .thumb-play-overlay {
+      background: rgba(0,0,0,0.35);
+    }
+    .thumb-play-circle {
+      width: 52px; height: 52px;
+      border: 2px solid rgba(255,255,255,0.7);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transform: scale(0.85);
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .thumb-play-circle svg { width: 20px; height: 20px; fill: #fff; margin-left: 3px; }
+    .tutorial-card:hover .thumb-play-circle,
+    .featured-card:hover .thumb-play-circle {
+      opacity: 1;
+      transform: scale(1);
     }
 
     /* ── WHATSAPP FLOAT ── */
@@ -324,8 +336,9 @@
     <!-- Featured -->
     <a href="https://www.youtube.com/watch?v=2v3nPGYPFEo" target="_blank" rel="noopener" class="featured-card" data-tags="beginner classic">
       <div class="featured-thumb">
-        <div class="yt-wrap">
-          <iframe src="https://www.youtube.com/embed/2v3nPGYPFEo?rel=0&modestbranding=1" allowfullscreen loading="lazy" title="How to Apply Classic Lash Extensions from Scratch"></iframe>
+        <img src="images/classic-full-set.jpeg" alt="How to Apply Classic Lash Extensions from Scratch" />
+        <div class="thumb-play-overlay">
+          <div class="thumb-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
       </div>
       <div class="featured-body">
@@ -339,8 +352,9 @@
     <!-- Cards -->
     <a href="https://www.youtube.com/watch?v=JQ6VBs_1bBE" target="_blank" rel="noopener" class="tutorial-card" data-tags="intermediate volume">
       <div class="tutorial-thumb">
-        <div class="yt-wrap">
-          <iframe src="https://www.youtube.com/embed/JQ6VBs_1bBE?rel=0&modestbranding=1" allowfullscreen loading="lazy" title="Making Perfect Volume Fans"></iframe>
+        <img src="images/volume.jpeg" alt="Making Perfect Volume Fans" />
+        <div class="thumb-play-overlay">
+          <div class="thumb-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
       </div>
       <div class="tutorial-body">
@@ -355,8 +369,9 @@
 
     <a href="https://www.youtube.com/watch?v=okTkX3bCHD8" target="_blank" rel="noopener" class="tutorial-card" data-tags="advanced">
       <div class="tutorial-thumb">
-        <div class="yt-wrap">
-          <iframe src="https://www.youtube.com/embed/okTkX3bCHD8?rel=0&modestbranding=1" allowfullscreen loading="lazy" title="Lash Retention"></iframe>
+        <img src="images/retention.jpeg" alt="Lash Retention" />
+        <div class="thumb-play-overlay">
+          <div class="thumb-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
       </div>
       <div class="tutorial-body">
@@ -371,8 +386,9 @@
 
     <a href="https://www.youtube.com/watch?v=KqKOBpfMBhw" target="_blank" rel="noopener" class="tutorial-card" data-tags="beginner tools">
       <div class="tutorial-thumb">
-        <div class="yt-wrap">
-          <iframe src="https://www.youtube.com/embed/KqKOBpfMBhw?rel=0&modestbranding=1" allowfullscreen loading="lazy" title="Essential Lash Tools"></iframe>
+        <img src="images/tools.jpeg" alt="Essential Lash Tools" />
+        <div class="thumb-play-overlay">
+          <div class="thumb-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
       </div>
       <div class="tutorial-body">
@@ -387,8 +403,9 @@
 
     <a href="https://www.youtube.com/watch?v=lFWFtPpMtKE" target="_blank" rel="noopener" class="tutorial-card" data-tags="intermediate classic">
       <div class="tutorial-thumb">
-        <div class="yt-wrap">
-          <iframe src="https://www.youtube.com/embed/lFWFtPpMtKE?rel=0&modestbranding=1" allowfullscreen loading="lazy" title="Lash Mapping for Eye Shapes"></iframe>
+        <img src="images/volume-set.jpeg" alt="Lash Mapping for Eye Shapes" />
+        <div class="thumb-play-overlay">
+          <div class="thumb-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
       </div>
       <div class="tutorial-body">
@@ -403,8 +420,9 @@
 
     <a href="https://www.youtube.com/watch?v=Xb_8IKqGbX4" target="_blank" rel="noopener" class="tutorial-card" data-tags="advanced volume">
       <div class="tutorial-thumb">
-        <div class="yt-wrap">
-          <iframe src="https://www.youtube.com/embed/Xb_8IKqGbX4?rel=0&modestbranding=1" allowfullscreen loading="lazy" title="Mega Volume Lashes"></iframe>
+        <img src="images/mega-volume.jpeg" alt="Mega Volume Lashes" />
+        <div class="thumb-play-overlay">
+          <div class="thumb-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
       </div>
       <div class="tutorial-body">
@@ -419,8 +437,9 @@
 
     <a href="https://www.youtube.com/watch?v=0_LuDN_MCMY" target="_blank" rel="noopener" class="tutorial-card" data-tags="beginner tools">
       <div class="tutorial-thumb">
-        <div class="yt-wrap">
-          <iframe src="https://www.youtube.com/embed/0_LuDN_MCMY?rel=0&modestbranding=1" allowfullscreen loading="lazy" title="Starting a Lash Business"></iframe>
+        <img src="images/fan.jpeg" alt="Starting a Lash Business" />
+        <div class="thumb-play-overlay">
+          <div class="thumb-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
       </div>
       <div class="tutorial-body">
