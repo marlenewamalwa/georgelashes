@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorials — George Lashes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0a0a0a;
+      --white: #ffffff;
+      --grey-100: #f5f5f5;
+      --grey-200: #e8e8e8;
+      --grey-400: #999999;
+      --grey-700: #333333;
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--black); display: flex; align-items: center;
+      justify-content: space-between; padding: 0 2.5rem; height: 60px;
+      border-bottom: 1px solid #1f1f1f;
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--white); letter-spacing: 0.1em; text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--grey-400); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-book { background: var(--white); color: var(--black) !important; padding: 0.45rem 1.2rem; font-weight: 600 !important; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: var(--white); display: block; }
+    .mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--black); padding: 1.5rem 2rem; z-index: 99; border-bottom: 1px solid #1f1f1f; }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a { display: block; color: var(--grey-400); text-decoration: none; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.7rem 0; border-bottom: 1px solid #1a1a1a; transition: color 0.2s; }
+    .mobile-menu a:hover { color: var(--white); }
+    @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: flex; } }
+
+    .page-header {
+      padding: 8rem 2.5rem 4rem;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .breadcrumb {
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--grey-400); margin-bottom: 1.5rem;
+    }
+    .breadcrumb a { color: var(--grey-400); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--white); }
+    .page-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+    }
+    .page-title .outline {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--white);
+      display: block;
+      padding-left: clamp(1rem, 4vw, 4rem);
+    }
+    .page-subtitle { color: var(--grey-400); font-size: 0.9rem; margin-top: 1.5rem; max-width: 500px; line-height: 1.7; }
+
+    /* Filters */
+    .filters {
+      padding: 2rem 2.5rem;
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .filter-btn {
+      padding: 0.4rem 1rem;
+      border: 1px solid #2a2a2a;
+      background: transparent;
+      color: var(--grey-400);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--white);
+      border-color: var(--white);
+      color: var(--black);
+    }
+
+    /* Tutorials Grid */
+    .tutorials-section { padding: 3rem 2.5rem 6rem; }
+    .tutorials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1px;
+      background: #1a1a1a;
+      border: 1px solid #1a1a1a;
+    }
+    .tutorial-card {
+      background: var(--black);
+      text-decoration: none;
+      color: var(--white);
+      display: block;
+      transition: background 0.2s;
+    }
+    .tutorial-card:hover { background: #0f0f0f; }
+    .tutorial-thumb {
+      width: 100%; aspect-ratio: 16/9;
+      background: #111; overflow: hidden; position: relative;
+    }
+    .tutorial-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+    .tutorial-card:hover .tutorial-thumb img { transform: scale(1.04); }
+    .thumb-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      background: #111;
+    }
+    .play-icon {
+      width: 44px; height: 44px;
+      border: 1.5px solid #444;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      color: #555;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .tutorial-card:hover .play-icon { border-color: var(--white); color: var(--white); }
+    .tutorial-body { padding: 1.5rem; }
+    .tutorial-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 0.6rem;
+    }
+    .tutorial-tag {
+      font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey-400);
+    }
+    .tutorial-duration { font-size: 0.68rem; color: var(--grey-400); }
+    .tutorial-title { font-size: 0.95rem; font-weight: 500; line-height: 1.5; margin-bottom: 0.7rem; }
+    .tutorial-desc { font-size: 0.78rem; color: var(--grey-400); line-height: 1.6; }
+
+    /* Featured */
+    .featured-card {
+      background: var(--black);
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      text-decoration: none;
+      color: var(--white);
+      transition: background 0.2s;
+    }
+    .featured-card:hover { background: #0f0f0f; }
+    .featured-thumb {
+      aspect-ratio: 16/9;
+      background: #111;
+      overflow: hidden;
+      position: relative;
+    }
+    .featured-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    .featured-card:hover .featured-thumb img { transform: scale(1.03); }
+    .featured-body {
+      padding: 3rem 2.5rem;
+      display: flex; flex-direction: column; justify-content: center;
+      border-left: 1px solid #1a1a1a;
+    }
+    .featured-label {
+      font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--grey-400); margin-bottom: 1rem;
+    }
+    .featured-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .featured-desc { font-size: 0.85rem; color: var(--grey-400); line-height: 1.7; margin-bottom: 1.5rem; }
+    .watch-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--white);
+      border-bottom: 1px solid #333; padding-bottom: 3px;
+      transition: border-color 0.2s;
+    }
+    .watch-btn:hover { border-color: var(--white); }
+
+    @media (max-width: 768px) {
+      .featured-card { grid-template-columns: 1fr; }
+      .featured-body { border-left: none; border-top: 1px solid #1a1a1a; padding: 2rem 1.5rem; }
+      .page-header, .filters, .tutorials-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+
+    footer {
+      background: var(--black); border-top: 1px solid #1a1a1a;
+      padding: 2rem 2.5rem; display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--white); letter-spacing: 0.1em; }
+    .footer-copy { font-size: 0.72rem; color: var(--grey-400); }
+    .footer-socials { display: flex; gap: 1.2rem; }
+    .footer-socials a { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey-400); text-decoration: none; transition: color 0.2s; }
+    .footer-socials a:hover { color: var(--white); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">George Lashes</a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#gallery">Gallery</a></li>
+    <li><a href="tutorials.html" style="color:var(--white);">Tutorials</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="https://georgelashes.com/#booking" class="nav-book">Book Now</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html#services" onclick="toggleMenu()">Services</a>
+  <a href="index.html#gallery" onclick="toggleMenu()">Gallery</a>
+  <a href="tutorials.html" onclick="toggleMenu()" style="color:white;">Tutorials</a>
+  <a href="index.html#about" onclick="toggleMenu()">About</a>
+  <a href="index.html#contact" onclick="toggleMenu()">Contact</a>
+  <a href="https://georgelashes.com/#booking" onclick="toggleMenu()" style="color:white; font-weight:600;">Book Now →</a>
+</div>
+
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Tutorials</div>
+  <h1 class="page-title">
+    Learn
+    <span class="outline">Lashing</span>
+  </h1>
+  <p class="page-subtitle">Step-by-step tutorials from George — covering everything from your first classic set to advanced volume techniques.</p>
+</div>
+
+<div class="filters">
+  <button class="filter-btn active" onclick="filter(this, 'all')">All</button>
+  <button class="filter-btn" onclick="filter(this, 'beginner')">Beginner</button>
+  <button class="filter-btn" onclick="filter(this, 'intermediate')">Intermediate</button>
+  <button class="filter-btn" onclick="filter(this, 'advanced')">Advanced</button>
+  <button class="filter-btn" onclick="filter(this, 'classic')">Classic</button>
+  <button class="filter-btn" onclick="filter(this, 'volume')">Volume</button>
+  <button class="filter-btn" onclick="filter(this, 'tools')">Tools & Products</button>
+</div>
+
+<div class="tutorials-section">
+  <div class="tutorials-grid" id="grid">
+
+    <!-- Featured -->
+    <a href="#" class="featured-card" data-tags="beginner classic">
+      <div class="featured-thumb">
+        <!-- Replace: <img src="images/tut-featured.jpg" alt="Featured tutorial" /> -->
+        <div class="thumb-placeholder"><div class="play-icon">▶</div></div>
+      </div>
+      <div class="featured-body">
+        <div class="featured-label">⭐ Featured · Beginner · Classic</div>
+        <div class="featured-title">How to Apply Classic Lash Extensions from Scratch</div>
+        <div class="featured-desc">The complete beginner's guide — from prepping the natural lash to perfecting your isolation technique and applying the first extension safely and correctly.</div>
+        <span class="watch-btn">Watch now → 28 min</span>
+      </div>
+    </a>
+
+    <!-- Cards -->
+    <a href="#" class="tutorial-card" data-tags="intermediate volume">
+      <div class="tutorial-thumb"><div class="thumb-placeholder"><div class="play-icon">▶</div></div></div>
+      <div class="tutorial-body">
+        <div class="tutorial-meta">
+          <span class="tutorial-tag">Intermediate · Volume</span>
+          <span class="tutorial-duration">35 min</span>
+        </div>
+        <div class="tutorial-title">Making Perfect Volume Fans — The George Method</div>
+        <div class="tutorial-desc">Learn George's hand-made fan technique for consistent, symmetrical 3D–6D volume fans every time.</div>
+      </div>
+    </a>
+
+    <a href="#" class="tutorial-card" data-tags="advanced">
+      <div class="tutorial-thumb"><div class="thumb-placeholder"><div class="play-icon">▶</div></div></div>
+      <div class="tutorial-body">
+        <div class="tutorial-meta">
+          <span class="tutorial-tag">Advanced · Retention</span>
+          <span class="tutorial-duration">22 min</span>
+        </div>
+        <div class="tutorial-title">Lash Retention: Why Lashes Fall & How to Fix It</div>
+        <div class="tutorial-desc">Deep dive into bonding, curing time, humidity, and aftercare — the real reasons retention fails.</div>
+      </div>
+    </a>
+
+    <a href="#" class="tutorial-card" data-tags="beginner tools">
+      <div class="tutorial-thumb"><div class="thumb-placeholder"><div class="play-icon">▶</div></div></div>
+      <div class="tutorial-body">
+        <div class="tutorial-meta">
+          <span class="tutorial-tag">Beginner · Tools</span>
+          <span class="tutorial-duration">18 min</span>
+        </div>
+        <div class="tutorial-title">Essential Tools Every Lash Tech Needs in 2025</div>
+        <div class="tutorial-desc">Tweezers, adhesives, tape, primers — what to buy, what to skip, and where to source in Kenya.</div>
+      </div>
+    </a>
+
+    <a href="#" class="tutorial-card" data-tags="intermediate classic">
+      <div class="tutorial-thumb"><div class="thumb-placeholder"><div class="play-icon">▶</div></div></div>
+      <div class="tutorial-body">
+        <div class="tutorial-meta">
+          <span class="tutorial-tag">Intermediate · Classic</span>
+          <span class="tutorial-duration">30 min</span>
+        </div>
+        <div class="tutorial-title">Mapping Lash Styles for Different Eye Shapes</div>
+        <div class="tutorial-desc">How to read an eye shape and design a lash map that flatters — hooded, almond, round, and more.</div>
+      </div>
+    </a>
+
+    <a href="#" class="tutorial-card" data-tags="advanced volume">
+      <div class="tutorial-thumb"><div class="thumb-placeholder"><div class="play-icon">▶</div></div></div>
+      <div class="tutorial-body">
+        <div class="tutorial-meta">
+          <span class="tutorial-tag">Advanced · Volume</span>
+          <span class="tutorial-duration">42 min</span>
+        </div>
+        <div class="tutorial-title">Mega Volume: Building 10D+ Fans with Precision</div>
+        <div class="tutorial-desc">For experienced techs ready to go beyond 6D — speed, symmetry, and safe application at high density.</div>
+      </div>
+    </a>
+
+    <a href="#" class="tutorial-card" data-tags="beginner tools">
+      <div class="tutorial-thumb"><div class="thumb-placeholder"><div class="play-icon">▶</div></div></div>
+      <div class="tutorial-body">
+        <div class="tutorial-meta">
+          <span class="tutorial-tag">Beginner · Business</span>
+          <span class="tutorial-duration">20 min</span>
+        </div>
+        <div class="tutorial-title">Starting a Lash Business in Kenya — What I Wish I Knew</div>
+        <div class="tutorial-desc">From pricing your services to finding your first clients — George shares what actually worked.</div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">George Lashes</div>
+  <div class="footer-copy">© 2025 George Lashes. All rights reserved.</div>
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/georgelashes" target="_blank">Instagram</a>
+    <a href="https://georgelashes.com/#booking">Book</a>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+
+  function filter(btn, tag) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.querySelectorAll('#grid .tutorial-card, #grid .featured-card').forEach(card => {
+      if (tag === 'all') {
+        card.style.display = 'block';
+      } else {
+        const tags = card.dataset.tags || '';
+        card.style.display = tags.includes(tag) ? 'block' : 'none';
+      }
+    });
+  }
+</script>
+</body>
+</html>

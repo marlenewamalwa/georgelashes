@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>George Lashes — Perfect Lashes, Nairobi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #ffffff;
+      --grey-100: #f5f5f5;
+      --grey-200: #e8e8e8;
+      --grey-400: #999999;
+      --grey-700: #333333;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 60px;
+      border-bottom: 1px solid #1f1f1f;
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      color: var(--white);
+      letter-spacing: 0.1em;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--grey-400);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-book {
+      background: var(--white);
+      color: var(--black) !important;
+      padding: 0.45rem 1.2rem;
+      font-weight: 600 !important;
+      letter-spacing: 0.05em !important;
+    }
+    .nav-book:hover { background: var(--grey-200) !important; color: var(--black) !important; }
+
+    /* hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: var(--white); display: block; transition: 0.3s; }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: var(--black);
+      padding: 1.5rem 2rem;
+      z-index: 99;
+      border-bottom: 1px solid #1f1f1f;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a {
+      display: block;
+      color: var(--grey-400);
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid #1a1a1a;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--white); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--black);
+      min-height: 100vh;
+      padding-top: 90px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/hero.jpeg');
+      background-size: cover;
+      background-position: center 30%;
+      background-repeat: no-repeat;
+      opacity: 0.35;
+      z-index: 0;
+    }
+    .hero > *:not(.hero-bg) {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--grey-400);
+      margin-bottom: 1.2rem;
+    }
+    .hero-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 18vw, 16rem);
+      line-height: 0.88;
+      color: var(--white);
+      letter-spacing: 0.01em;
+    }
+    .hero-headline .offset {
+      display: block;
+      padding-left: clamp(1rem, 5vw, 6rem);
+      color: transparent;
+      -webkit-text-stroke: 2px var(--white);
+    }
+    .hero-sub {
+      margin-top: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .hero-sub p {
+      color: var(--grey-400);
+      font-size: 0.9rem;
+      max-width: 340px;
+      line-height: 1.7;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--white);
+      color: var(--black);
+      text-decoration: none;
+      padding: 1rem 2.5rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .btn-primary:hover { background: var(--grey-200); transform: translateY(-2px); }
+    .btn-outline {
+      display: inline-block;
+      border: 1.5px solid var(--white);
+      color: var(--white);
+      text-decoration: none;
+      padding: 0.9rem 2rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.08); }
+    
+
+    /* ── NOTICE STRIP ── */
+    .notice-strip {
+      background: var(--black);
+      border-top: 1px solid #1f1f1f;
+      border-bottom: 1px solid #1f1f1f;
+      padding: 1.2rem 2.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .notice-strip .label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey-400);
+      white-space: nowrap;
+      padding-top: 2px;
+      flex-shrink: 0;
+    }
+    .notice-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .notice-item {
+      font-size: 0.78rem;
+      color: var(--grey-400);
+      line-height: 1.5;
+    }
+    .notice-item strong { color: var(--white); }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 6rem 2.5rem; }
+    .section-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--grey-400);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+    .section-divider {
+      width: 40px;
+      height: 2px;
+      background: var(--black);
+      margin: 1.5rem 0 3rem;
+    }
+    .section-divider.white { background: var(--white); }
+
+    /* ── SERVICES ── */
+    #services { background: var(--grey-100); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--grey-200);
+      border: 1px solid var(--grey-200);
+      margin-top: 3rem;
+    }
+    .service-item {
+      background: var(--white);
+      padding: 0;
+      transition: background 0.2s;
+      overflow: hidden;
+    }
+    .service-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--grey-200);
+    }
+    .service-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .service-item:hover .service-img img { transform: scale(1.04); }
+    .service-item-body { padding: 2rem; }
+    .service-item:hover { background: var(--black); color: var(--white); }
+    .service-item:hover .service-price { color: var(--white); }
+    .service-item:hover .service-duration { color: var(--grey-400); }
+    .service-num {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--grey-400);
+      margin-bottom: 1rem;
+    }
+    .service-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .service-desc { font-size: 0.8rem; color: var(--grey-400); line-height: 1.6; margin-bottom: 1.2rem; }
+    .service-item:hover .service-desc { color: #888; }
+    .service-meta { display: flex; justify-content: space-between; align-items: center; }
+    .service-price { font-weight: 600; font-size: 1rem; }
+    .service-duration { font-size: 0.72rem; color: var(--grey-400); }
+    .services-cta { margin-top: 2.5rem; text-align: center; }
+    .btn-black {
+      display: inline-block;
+      background: var(--black);
+      color: var(--white);
+      text-decoration: none;
+      padding: 1rem 2.5rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-black:hover { background: var(--grey-700); transform: translateY(-2px); }
+
+    /* ── DEPOSIT NOTICE ── */
+    .deposit-box {
+      background: var(--black);
+      color: var(--white);
+      padding: 1.5rem 2rem;
+      margin-top: 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .deposit-box .icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+    .deposit-box p { font-size: 0.82rem; line-height: 1.7; color: #ccc; }
+    .deposit-box strong { color: var(--white); }
+
+    /* ── GALLERY ── */
+    #gallery { background: var(--black); color: var(--white); }
+    #gallery .section-eyebrow { color: var(--grey-400); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 260px);
+      gap: 6px;
+      margin-top: 3rem;
+    }
+    .gallery-item {
+      background: var(--grey-700);
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-item:first-child {
+      grid-column: 1 / 2;
+      grid-row: 1 / 3;
+    }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+    .gallery-placeholder {
+      width: 100%; height: 100%;
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: #444;
+      text-transform: uppercase;
+    }
+    .gallery-note {
+      margin-top: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--grey-400);
+    }
+    .gallery-note a { color: var(--white); text-underline-offset: 3px; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .about-img {
+      aspect-ratio: 3/4;
+      background: var(--grey-100);
+      position: relative;
+      overflow: hidden;
+    }
+    .about-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .about-img-placeholder {
+      width: 100%; height: 100%;
+      background: var(--grey-100);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; letter-spacing: 0.2em; color: var(--grey-400); text-transform: uppercase;
+    }
+    .about-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--grey-400);
+      margin-bottom: 0.7rem;
+    }
+    .about-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+    .about-text {
+      font-size: 0.9rem;
+      line-height: 1.85;
+      color: var(--grey-700);
+      margin-bottom: 1rem;
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--grey-200);
+    }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      line-height: 1;
+    }
+    .stat-label { font-size: 0.72rem; color: var(--grey-400); margin-top: 0.3rem; line-height: 1.4; }
+
+    /* ── TUTORIALS ── */
+    #tutorials { background: var(--black); color: var(--white); }
+    #tutorials .section-eyebrow { color: var(--grey-400); }
+    .tutorials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px;
+      background: #1a1a1a;
+      border: 1px solid #1a1a1a;
+      margin-top: 3rem;
+    }
+    .tutorial-card {
+      background: var(--black);
+      padding: 0;
+      transition: background 0.2s;
+      text-decoration: none;
+      color: var(--white);
+      display: block;
+    }
+    .tutorial-card:hover { background: #111; }
+    .tutorial-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #1a1a1a;
+      overflow: hidden;
+      position: relative;
+    }
+    .tutorial-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .tutorial-thumb-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+    }
+    .tutorial-body { padding: 1.5rem; }
+    .tutorial-tag {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey-400);
+      margin-bottom: 0.5rem;
+    }
+    .tutorial-title { font-size: 0.95rem; font-weight: 500; line-height: 1.4; margin-bottom: 0.5rem; }
+    .tutorial-duration { font-size: 0.72rem; color: var(--grey-400); }
+    .tutorials-cta { margin-top: 2.5rem; }
+
+    /* ── REVIEWS ── */
+    #reviews { background: var(--grey-100); }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .review-card {
+      background: var(--white);
+      padding: 2rem;
+      border-left: 3px solid var(--black);
+    }
+    .review-stars { font-size: 0.85rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+    .review-text { font-size: 0.88rem; line-height: 1.8; color: var(--grey-700); margin-bottom: 1.2rem; }
+    .review-author { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+    .review-date { font-size: 0.68rem; color: var(--grey-400); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--black); color: var(--white); }
+    #contact .section-eyebrow { color: var(--grey-400); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      margin-top: 3rem;
+    }
+    @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .contact-item { margin-bottom: 2rem; }
+    .contact-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey-400);
+      margin-bottom: 0.4rem;
+    }
+    .contact-value { font-size: 0.95rem; line-height: 1.6; }
+    .contact-value a { color: var(--white); text-underline-offset: 3px; }
+    .map-embed {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      overflow: hidden;
+    }
+    .map-embed iframe { width: 100%; height: 100%; border: none; filter: grayscale(1) invert(1); }
+    .map-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; letter-spacing: 0.2em; color: #333; text-transform: uppercase;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid #1a1a1a;
+      padding: 2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      color: var(--white);
+      letter-spacing: 0.1em;
+    }
+    .footer-copy { font-size: 0.72rem; color: var(--grey-400); }
+    .footer-socials { display: flex; gap: 1.2rem; }
+    .footer-socials a {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey-400);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-socials a:hover { color: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      section { padding: 4rem 1.5rem; }
+      nav { padding: 0 1.5rem; }
+      .hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .gallery-item:first-child { grid-column: 1 / 3; grid-row: auto; }
+      .notice-strip { padding: 1.2rem 1.5rem; flex-direction: column; }
+      footer { padding: 2rem 1.5rem; }
+    }
+    /* ── WHATSAPP FLOAT ── */
+    .wa-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+    .wa-float-label {
+      background: var(--white);
+      color: var(--black);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateX(8px);
+      transition: opacity 0.25s, transform 0.25s;
+      pointer-events: none;
+    }
+    .wa-float:hover .wa-float-label {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .wa-float-btn {
+      width: 56px;
+      height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+      transition: transform 0.2s, box-shadow 0.2s;
+      flex-shrink: 0;
+    }
+    .wa-float:hover .wa-float-btn {
+      transform: scale(1.08);
+      box-shadow: 0 6px 28px rgba(37,211,102,0.55);
+    }
+    .wa-float-btn svg {
+      width: 28px;
+      height: 28px;
+      fill: #fff;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">George Lashes</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#tutorials">Tutorials</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://georgelashes.com/#booking" class="nav-book">Book Now</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+  <a href="#tutorials" onclick="toggleMenu()">Tutorials</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+  <a href="https://georgelashes.com/#booking" onclick="toggleMenu()" style="color:white; font-weight:600;">Book Now →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <p class="hero-eyebrow">Nairobi's Premier Lash Studio</p>
+  <h1 class="hero-headline">
+    PERFECT
+    <span class="offset">LASHES</span>
+  </h1>
+  <div class="hero-sub">
+    <p>Classic, Volume, Hybrid & Mega Volume extensions by George — Nairobi's most trusted lash artist.</p>
+    <a href="https://georgelashes.com/#booking" class="btn-primary">Book a Session</a>
+    <a href="#services" class="btn-outline">See Services</a>
+  </div>
+  
+</section>
+
+<!-- NOTICE STRIP -->
+<div class="notice-strip">
+  <span class="label">Before you come</span>
+  <div class="notice-items">
+    <div class="notice-item"><strong>Old lashes?</strong> Arrive 30 min early for removal</div>
+    <div class="notice-item"><strong>No makeup</strong> or mascara on the day</div>
+    <div class="notice-item"><strong>Bring headphones</strong> & a pillow if you'd like</div>
+    <div class="notice-item"><strong>Special conditions?</strong> Let us know in advance</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <p class="section-eyebrow">What we offer</p>
+  <h2 class="section-title">Services &<br/>Pricing</h2>
+  <div class="section-divider"></div>
+
+  <div class="services-grid">
+    <div class="service-item">
+      <div class="service-img"><img src="images/classic-full-set.jpeg" alt="Classic Full Set" /></div>
+      <div class="service-item-body">
+      <div class="service-num">01</div>
+      <div class="service-name">Classic Full Set</div>
+      <div class="service-desc">One extension per natural lash. Effortless, natural-looking enhancement for everyday elegance.</div>
+      <div class="service-meta">
+        <span class="service-price">KES 2,500</span>
+        <span class="service-duration">90 min</span>
+      </div>
+      </div>
+    </div>
+    <div class="service-item">
+      <div class="service-img"><img src="images/hybrid-set.jpeg" alt="Hybrid Set" /></div>
+      <div class="service-item-body">
+      <div class="service-num">02</div>
+      <div class="service-name">Hybrid Set</div>
+      <div class="service-desc">Classic and volume combined for a textured, wispy, multi-dimensional result.</div>
+      <div class="service-meta">
+        <span class="service-price">KES 3,200</span>
+        <span class="service-duration">105 min</span>
+      </div>
+      </div>
+    </div>
+    <div class="service-item">
+      <div class="service-img"><img src="images/volume-set.jpeg" alt="Volume Set" /></div>
+      <div class="service-item-body">
+      <div class="service-num">03</div>
+      <div class="service-name">Volume Set</div>
+      <div class="service-desc">Handmade 3D–6D fans for a full, dramatic look. The signature George Lashes finish.</div>
+      <div class="service-meta">
+        <span class="service-price">KES 4,000</span>
+        <span class="service-duration">120 min</span>
+      </div>
+      </div>
+    </div>
+    <div class="service-item">
+      <div class="service-img"><img src="images/mega-volume.jpeg" alt="Mega Volume" /></div>
+      <div class="service-item-body">
+      <div class="service-num">04</div>
+      <div class="service-name">Mega Volume</div>
+      <div class="service-desc">10D+ ultra-fine fans for maximum density. Bold, unapologetic, unmistakable.</div>
+      <div class="service-meta">
+        <span class="service-price">KES 5,500</span>
+        <span class="service-duration">150 min</span>
+      </div>
+      </div>
+    </div>
+    <div class="service-item">
+      <div class="service-img"><img src="images/infill.jpeg" alt="Infill" /></div>
+      <div class="service-item-body">
+      <div class="service-num">05</div>
+      <div class="service-name">Infill · 2 Weeks</div>
+      <div class="service-desc">Maintain the fullness of your set with a 2-week infill appointment.</div>
+      <div class="service-meta">
+        <span class="service-price">KES 1,500</span>
+        <span class="service-duration">60 min</span>
+      </div>
+      </div>
+    </div>
+    <div class="service-item">
+      <div class="service-img"><img src="images/lash-removal.jpeg" alt="Lash Removal" /></div>
+      <div class="service-item-body">
+      <div class="service-num">06</div>
+      <div class="service-name">Lash Removal</div>
+      <div class="service-desc">Safe, professional removal of your existing lash extensions.</div>
+      <div class="service-meta">
+        <span class="service-price">KES 500</span>
+        <span class="service-duration">30 min</span>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="deposit-box">
+    <div class="icon">💳</div>
+    <p>A <strong>non-refundable deposit of KES 2,000</strong> is required to confirm all appointments. Send via M-Pesa to <strong>Till No. 9559931</strong>, then proceed with booking. Call <strong>0713 635 302</strong> if the prompt fails.</p>
+  </div>
+
+  <div class="services-cta">
+    <a href="https://georgelashes.com/#booking" class="btn-black">Book Your Appointment →</a>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <p class="section-eyebrow">The work</p>
+  <h2 class="section-title" style="color:var(--white);">Gallery</h2>
+  <div class="section-divider white"></div>
+
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <!-- Replace with: <img src="images/gallery-1.jpg" alt="Lash set by George" /> -->
+      <div class="gallery-placeholder"><img src="images/2.jpeg" alt="Lash set by George" /></div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder"><img src="images/1.jpeg" alt="Lash set by George" /></div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder"><img src="images/hybrid-set.jpeg" alt="Lash set by George" /></div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder"><img src="images/4.jpeg" alt="Lash set by George" /></div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder"><img src="images/5.jpeg" alt="Lash set by George" /></div>
+    </div>
+  </div>
+  <p class="gallery-note">Follow <a href="https://www.instagram.com/georgelashes" target="_blank">@georgelashes</a> on Instagram for the latest work.</p>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img">
+      <!-- Replace with: <img src="images/george.jpg" alt="George, lash artist" /> -->
+      <div class="about-img-placeholder"><img src="images/fakegeorge.jpg" alt="George, lash artist" /></div>
+    </div>
+    <div class="about-content">
+      <p class="about-label">The artist</p>
+      <h2 class="about-name">Meet<br/>George</h2>
+      <p class="about-text">George is Nairobi's most sought-after lash artist — known for a precise, meticulous approach that treats every set as a work of art tailored to the individual eye shape and lifestyle of each client.</p>
+      <p class="about-text">With years of hands-on experience and a growing community of students through his tutorial content, George has built George Lashes into a studio synonymous with quality, consistency, and care.</p>
+      <p class="about-text">Every appointment is a one-on-one experience. No rushing, no cutting corners — just perfect lashes, every time.</p>
+      <div class="about-stats">
+        <div>
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Happy clients</div>
+        </div>
+        <div>
+          <div class="stat-num">6</div>
+          <div class="stat-label">Services offered</div>
+        </div>
+        <div>
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Client satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TUTORIALS -->
+<section id="tutorials">
+  <p class="section-eyebrow">Learn from George</p>
+  <h2 class="section-title" style="color:var(--white);">Tutorials</h2>
+  <div class="section-divider white"></div>
+
+  <div class="tutorials-grid">
+    <a href="tutorials.html" class="tutorial-card">
+      <div class="tutorial-thumb">
+        <img src="images/application.jpeg" alt="Classic lash extension tutorial" />
+      </div>
+      <div class="tutorial-body">
+        <div class="tutorial-tag">Beginner · Classic</div>
+        <div class="tutorial-title">How to Apply Classic Lash Extensions from Scratch</div>
+        <div class="tutorial-duration">28 min</div>
+      </div>
+    </a>
+    <a href="tutorials.html" class="tutorial-card">
+      <div class="tutorial-thumb">
+        <img src="images/volume.jpeg" alt="Volume fans tutorial" />
+      </div>
+      <div class="tutorial-body">
+        <div class="tutorial-tag">Intermediate · Volume</div>
+        <div class="tutorial-title">Making Perfect Volume Fans — The George Method</div>
+        <div class="tutorial-duration">35 min</div>
+      </div>
+    </a>
+    <a href="tutorials.html" class="tutorial-card">
+      <div class="tutorial-thumb">
+        <img src="images/retention2.jpeg" alt="Lash retention tutorial" />
+      </div>
+      <div class="tutorial-body">
+        <div class="tutorial-tag">Advanced · Retention</div>
+        <div class="tutorial-title">Lash Retention: Why Lashes Fall & How to Fix It</div>
+        <div class="tutorial-duration">22 min</div>
+      </div>
+    </a>
+    <a href="tutorials.html" class="tutorial-card">
+      <div class="tutorial-thumb">
+        <img src="images/tools.jpeg" alt="Lash tools tutorial" />
+      </div>
+      <div class="tutorial-body">
+        <div class="tutorial-tag">Beginner · Tools</div>
+        <div class="tutorial-title">Essential Tools Every Lash Tech Needs in 2025</div>
+        <div class="tutorial-duration">18 min</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="tutorials-cta">
+    <a href="tutorials.html" class="btn-primary">View All Tutorials →</a>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <p class="section-eyebrow">Client love</p>
+  <h2 class="section-title">Reviews</h2>
+  <div class="section-divider"></div>
+
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"George is the only person I trust with my lashes in Nairobi. The attention to detail is unmatched — my sets last longer than anywhere I've been before."</p>
+      <div class="review-author">Amina W.</div>
+      <div class="review-date">Volume Set · March 2025</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"First time getting lashes done and George made the whole experience so comfortable. Will never go anywhere else. The hybrid set is absolutely gorgeous."</p>
+      <div class="review-author">Cynthia M.</div>
+      <div class="review-date">Hybrid Set · April 2025</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Professional, precise, and so relaxing. I fell asleep halfway through! Woke up to the most perfect mega volume set. George is literally an artist."</p>
+      <div class="review-author">Sharon K.</div>
+      <div class="review-date">Mega Volume · May 2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-eyebrow">Get in touch</p>
+  <h2 class="section-title" style="color:var(--white);">Contact &<br/>Location</h2>
+  <div class="section-divider white"></div>
+
+  <div class="contact-grid">
+    <div>
+      <div class="contact-item">
+        <div class="contact-label">Phone / WhatsApp</div>
+        <div class="contact-value"><a href="tel:+254713635302">0713 635 302</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Instagram</div>
+        <div class="contact-value"><a href="https://www.instagram.com/george_lashes/" target="_blank">@georgelashes</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Location</div>
+        <div class="contact-value">Chaka Court, Nairobi, Kenya<br/><span style="color:var(--grey-400); font-size:0.82rem;">Exact address shared on booking confirmation</span></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Hours</div>
+        <div class="contact-value" style="font-size:0.85rem; line-height:2;">
+          Mon – Fri: 8:00 AM – 7:00 PM<br/>
+          Saturday: 9:00 AM – 5:00 PM<br/>
+          Sunday: By appointment only
+        </div>
+      </div>
+      <a href="https://georgelashes.com/#booking" class="btn-primary" style="margin-top:1rem;">Book Now →</a>
+    </div>
+    <div>
+      <div class="map-embed">
+        <!-- Uncomment and add your real coordinates:
+        <iframe src="https://maps.google.com/maps?q=Nairobi,Kenya&output=embed"></iframe>
+        -->
+        <div class="map-placeholder"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.801993505405!2d36.78960767496559!3d-1.293263398694445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f11daa69ff6d9%3A0x65f4f79d088eecce!2sChaka%20Court!5e0!3m2!1sen!2ske!4v1781083317798!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">George Lashes</div>
+  <div class="footer-copy">© 2025 George Lashes. All rights reserved.</div>
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/george_lashes/" target="_blank">Instagram</a>
+    <a href="https://georgelashes.com/#booking">Book</a>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/254713635302?text=Hi%20George%2C%20I'd%20like%20to%20book%20an%20appointment" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <span class="wa-float-label">Chat on WhatsApp</span>
+  <div class="wa-float-btn">
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16.003 2.667C8.64 2.667 2.667 8.64 2.667 16c0 2.347.627 4.64 1.813 6.653L2.667 29.333l6.84-1.786A13.253 13.253 0 0016.003 29.333C23.36 29.333 29.333 23.36 29.333 16S23.36 2.667 16.003 2.667zm0 2.4c5.88 0 10.93 5.053 10.93 10.933 0 5.88-5.05 10.933-10.93 10.933a10.9 10.9 0 01-5.547-1.52l-.387-.227-4.053 1.053 1.08-3.947-.253-.4A10.893 10.893 0 015.07 16c0-5.88 5.053-10.933 10.933-10.933zm-3.12 5.28c-.24 0-.627.093-.947.44-.32.347-1.213 1.187-1.213 2.88 0 1.693 1.24 3.333 1.413 3.56.173.227 2.413 3.88 5.96 5.28 2.96 1.16 3.547.947 4.187.893.64-.053 2.067-.84 2.36-1.653.293-.813.293-1.507.2-1.653-.093-.147-.333-.24-.693-.427-.36-.187-2.067-1.013-2.387-1.133-.32-.12-.547-.187-.773.187-.227.373-.88 1.133-1.08 1.36-.2.227-.4.24-.747.08-.347-.16-1.467-.547-2.8-1.733-1.04-.933-1.733-2.08-1.933-2.427-.2-.347-.013-.533.16-.72.16-.16.36-.4.533-.613.173-.213.24-.36.36-.613.12-.253.053-.467-.027-.653-.08-.187-.747-1.893-1.04-2.587-.267-.667-.547-.573-.747-.587-.187-.013-.4-.013-.627-.013z"/>
+    </svg>
+  </div>
+</a>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+
+  // Close mobile menu on outside click
+  document.addEventListener('click', (e) => {
+    const menu = document.getElementById('mobile-menu');
+    const hamburger = document.getElementById('hamburger');
+    if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+</script>
+</body>
+</html>
