@@ -23,7 +23,8 @@
       justify-content: space-between; padding: 0 2.5rem; height: 60px;
       border-bottom: 1px solid #1f1f1f;
     }
-    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--white); letter-spacing: 0.1em; text-decoration: none; }
+    .nav-logo { text-decoration: none; display: flex; align-items: center; }
+    .nav-logo img { height: 36px; width: auto; display: block; }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a { color: var(--grey-400); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
     .nav-links a:hover { color: var(--white); }
@@ -287,7 +288,7 @@
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">George Lashes</a>
+  <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="George Lashes" /></a>
   <ul class="nav-links">
     <li><a href="index.html#services">Services</a></li>
     <li><a href="index.html#gallery">Gallery</a></li>

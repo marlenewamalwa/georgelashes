@@ -40,11 +40,14 @@
       border-bottom: 1px solid #1f1f1f;
     }
     .nav-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem;
-      color: var(--white);
-      letter-spacing: 0.1em;
       text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .nav-logo img {
+      height: 36px;
+      width: auto;
+      display: block;
     }
     .nav-links {
       display: flex;
@@ -620,7 +623,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">George Lashes</a>
+  <a href="#" class="nav-logo"><img src="images/logo.png" alt="George Lashes" /></a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#gallery">Gallery</a></li>
@@ -793,7 +796,7 @@
   <div class="about-grid">
     <div class="about-img">
       <!-- Replace with: <img src="images/george.jpg" alt="George, lash artist" /> -->
-      <div class="about-img-placeholder"><img src="images/fakegeorge.jpg" alt="George, lash artist" /></div>
+      <div class="about-img-placeholder"><img src="images/george.jpeg" alt="George, lash artist" /></div>
     </div>
     <div class="about-content">
       <p class="about-label">The artist</p>
